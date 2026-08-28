@@ -41,7 +41,7 @@ class AgenteController {
             seleniumAutomatorService.ejecutarAutomatizacion()
 
             // Respondemos al navegador cuando termine con éxito
-            render status: 200, text: "Automatización completada con éxito. Revisa la consola de IntelliJ."
+            render status: 200, text: "Automatización completada con éxito"
         } catch (Exception e) {
             log.error("Error al ejecutar Selenium desde la web", e)
             render status: 500, text: "Error en la automatización: ${e.message}"
