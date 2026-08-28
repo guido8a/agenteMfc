@@ -94,7 +94,7 @@ class SeleniumAutomatorService {
             )
             seleccionarContrato.click()
 
-
+            sleep(3000)
             // Aquí puedes agregar clics, interactuar con formularios, etc.
 
         } catch (Exception e) {
