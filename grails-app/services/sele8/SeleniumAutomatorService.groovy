@@ -34,7 +34,6 @@ class SeleniumAutomatorService {
             WebDriverWait wait2 = new WebDriverWait(driver,15)
             WebDriverWait wait3 = new WebDriverWait(driver, 20)
 
-            // 4. Tu lógica de negocio / Web Scraping / Automatización
             driver.get("http://127.0.0.1:8085/login/login")
             WebElement button = driver.findElement(By.id("ingresar"))
             button.click()
