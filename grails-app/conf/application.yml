@@ -131,5 +131,6 @@ environments:
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
         selenium:
             hub:
-                url: "http://127.0.0.1" # IP de tu servidor Grid real
+                url: "http://200.93.248.62/wd/hub"
+#                url: "http://127.0.0.1" # IP de tu servidor Grid real
 #                url: "http://localhost:4444/wd/hub" # Tu Docker local
