@@ -1,5 +1,8 @@
 package sele8
 
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.firefox.FirefoxDriver
+
 //import grails.gorm.transactions.Transactional
 //
 //@Transactional
@@ -12,6 +15,7 @@ package sele8
 
 import org.openqa.selenium.firefox.FirefoxOptions
 import org.openqa.selenium.remote.RemoteWebDriver
+import io.github.bonigarcia.wdm.WebDriverManager
 //import grails.gorm.transactions.Transactional
 
 //@Transactional
@@ -24,10 +28,23 @@ class ScraperService {
         // 1. Leer la URL del Hub desde application.yml (por defecto localhost si no existe)
         String hubUrl = grailsApplication.config.getProperty('selenium.hub.url', String, "http://localhost:4444/wd/hub")
 
+
+
+
         // 2. Configurar las opciones de Firefox
         FirefoxOptions options = new FirefoxOptions()
         options.addArguments("-headless") // Recomendado para servidores (evita consumir memoria de video)
         options.setAcceptInsecureCerts(true) // Omitir alertas de certificados SSL inválidos
+        // 2. Desactivar el aislamiento de sandbox si corre bajo usuarios restringidos (como 'tomcat')
+        options.addArguments("--no-sandbox")
+        options.addArguments("--disable-dev-shm-usage")
+
+
+
+//        WebDriverManager.firefoxdriver().setup()
+//        WebDriver driver = new FirefoxDriver(options)
+//
+
 
         RemoteWebDriver driver = null
         String resultado = ""
