@@ -14,13 +14,23 @@ package sele8
 //    }
 //}
 
+//class BootStrap {
+//
+//    def init = { servletContext ->
+//        // Dejar vacío o solo con logs iniciales. No llamar al servicio aquí.
+//        println "=== Servidor Grails iniciado. Listo para recibir peticiones ==="
+//    }
+//
+//    def destroy = {
+//    }
+//}
+
+
+
 class BootStrap {
-
     def init = { servletContext ->
-        // Dejar vacío o solo con logs iniciales. No llamar al servicio aquí.
-        println "=== Servidor Grails iniciado. Listo para recibir peticiones ==="
+        // Totalmente vacío, sin consultas ni lógica
     }
-
     def destroy = {
     }
 }

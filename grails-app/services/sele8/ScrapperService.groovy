@@ -12,9 +12,9 @@ package sele8
 
 import org.openqa.selenium.firefox.FirefoxOptions
 import org.openqa.selenium.remote.RemoteWebDriver
-import grails.gorm.transactions.Transactional
+//import grails.gorm.transactions.Transactional
 
-@Transactional
+//@Transactional
 class ScraperService {
 
     // Extraemos la URL de la configuración de Grails para que no esté hardcodeada
