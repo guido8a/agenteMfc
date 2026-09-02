@@ -42,16 +42,16 @@ class ScraperService {
 
 
 //        WebDriverManager.firefoxdriver().setup()
-//        WebDriver driver = new FirefoxDriver(options)
+        WebDriver driver = new FirefoxDriver(options)
 //
 
 
-        RemoteWebDriver driver = null
+//        RemoteWebDriver driver = null
         String resultado = ""
 
         try {
             // 3. Conectar al Grid 4 remoto
-            driver = new RemoteWebDriver(new URL(hubUrl), options)
+//            driver = new RemoteWebDriver(new URL(hubUrl), options)
 
             // 4. Realizar la automatización
             driver.get(urlDestino)
