@@ -144,7 +144,7 @@ environments:
         # Tu configuración del Hub en el servidor externo
         selenium:
             hub:
-                url: "http://200.93.248.62/wd/hub"
+                url: "http://200.93.248.62"
 
 
 
