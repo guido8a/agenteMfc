@@ -41,7 +41,7 @@ class ScraperService {
 
 
 
-//        WebDriverManager.firefoxdriver().setup()
+        WebDriverManager.firefoxdriver().setup()
         WebDriver driver = new FirefoxDriver(options)
 //
 
