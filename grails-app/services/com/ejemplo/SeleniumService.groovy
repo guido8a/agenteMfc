@@ -340,6 +340,8 @@ class SeleniumService {
                 js3.executeScript("arguments.focus();", botonGuardar)
                 js3.executeScript("arguments.click();", botonGuardar)
 
+                //siguiente parte
+
 
 
 //            //ingresar a los datos del oferente
