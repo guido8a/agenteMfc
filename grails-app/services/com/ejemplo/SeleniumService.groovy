@@ -158,7 +158,6 @@ class SeleniumService {
             )
             ingreso.click()
 
-
             // OFERTAS
 //
             def abrirOfertas = wait2.until(
