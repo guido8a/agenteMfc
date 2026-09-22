@@ -36,6 +36,7 @@ package com.ejemplo
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -638,19 +639,25 @@ class SeleniumService {
 
                 //boton guardar
 
-                def guardarPersonal = wait.until(
-                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
-                guardarPersonal.click()
+//                def guardarPersonal = wait.until(
+//                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+//                guardarPersonal.click()
+//
+//                def guardarPersonal2 = wait.until(
+//                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+//                guardarPersonal2.click()
 
-                def guardarPersonal2 = wait.until(
-                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
-                guardarPersonal2.click()
+                JavascriptExecutor js3 = (JavascriptExecutor) driver
+
+//                WebElement dialogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("modExpProfesional")))
 
                 WebElement botonGuardar = driver.findElement(By.id("guardarExperienciaProfesional"))
 
-                JavascriptExecutor js3 = (JavascriptExecutor) driver
+//                js3.executeScript("arguments.focus();", dialogo)
                 js3.executeScript("arguments.focus();", botonGuardar)
                 js3.executeScript("arguments.click();", botonGuardar)
+
+                botonGuardar.sendKeys(Keys.ENTER)
 
             }    // Aquí puedes agregar clics, interactuar con formularios, etc.
 
