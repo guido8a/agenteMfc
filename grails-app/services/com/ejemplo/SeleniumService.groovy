@@ -630,11 +630,11 @@ class SeleniumService {
 
                 //actividades relevantes
 
-                def comboNE = wait.until(
+                def campoActividades= wait.until(
                         ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_activiRelevEp"))
                 )
-                Select seleccionarNivelEstudio = new Select(comboNE)
-                seleccionarNivelEstudio.selectByVisibleText("Actividades.....")
+                campoActividades.clear()
+                campoActividades.sendKeys("Actividades...")
 
                 //boton guardar
 
