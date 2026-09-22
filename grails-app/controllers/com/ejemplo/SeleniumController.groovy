@@ -50,4 +50,21 @@ class SeleniumController {
             render status: 500, text: "Error en la automatización: ${e.message}"
         }
     }
+
+    def iniciarCargaExperienciaLaboral() {
+        println "=== Petición web recibida: Iniciando Selenium ==="
+
+        String numeroOferta = params.id
+        String numeroPersonal = params.personal
+
+        try {
+            seleniumService.ejecutarAutomatizacionExperienciaLaboral(Integer.parseInt(numeroOferta), Integer.parseInt(numeroPersonal))
+
+            render status: 200, text: "Automatización completada con éxito"
+        } catch (Exception e) {
+            log.error("Error al ejecutar Selenium desde la web", e)
+            render status: 500, text: "Error en la automatización: ${e.message}"
+        }
+    }
+
 }

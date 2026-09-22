@@ -319,12 +319,6 @@ class SeleniumService {
 
                 //boton guardar
 
-//                def guardarPersonal = wait.until(
-//                        ExpectedConditions.visibilityOfElementLocated(By.id("guardarPersonalTecnico"))
-//                )
-//                guardarPersonal.click()
-
-
                 def guardarPersonal = wait.until(
                         ExpectedConditions.elementToBeClickable(By.id("guardarPersonalTecnico")) )
                 guardarPersonal.click()
@@ -476,7 +470,198 @@ class SeleniumService {
             // 5. Asegurar el cierre del proceso de Firefox
             if (driver != null) {
 //                driver.quit()
-                println "=== Navegador Firefox cerrado correctamente ==="
+                println "=== Terminado correctamente ==="
+            }
+        }
+    }
+
+    void ejecutarAutomatizacionExperienciaLaboral(int oferta, int personal) {
+        println "=== Iniciando automatización con Edge ==="
+
+        if (!targetFile.exists()) {
+
+            java.io.InputStream inputStream = this.class.classLoader.getResourceAsStream("drivers/" + driverName)
+
+            if (inputStream == null) {
+                throw new java.io.FileNotFoundException("No se encontró el driver dentro del WAR en: resources/drivers/" + driverName)
+            }
+
+            targetFile.withOutputStream { outputStream ->
+                outputStream << inputStream
+            }
+
+            if (!isWindows) {
+                targetFile.setExecutable(true)
+            }
+        }
+
+        System.setProperty("webdriver.edge.driver", targetFile.getAbsolutePath())
+
+        EdgeOptions options = new EdgeOptions()
+
+        DesiredCapabilities capabilities = DesiredCapabilities.edge()
+
+        java.util.ArrayList<String> argsList = new java.util.ArrayList<String>()
+        argsList.add("--disable-gpu")
+        argsList.add("--no-sandbox")
+        argsList.add("--start-maximized")
+        argsList.add("--disable-dev-shm-usage")
+        argsList.add("--window-size=1920,1080")
+
+        java.util.HashMap<String, Object> edgeOptionsMap = new java.util.HashMap<String, Object>()
+        edgeOptionsMap.put("detach", true)
+        edgeOptionsMap.put("args", argsList)
+
+        capabilities.setCapability("ms:edgeOptions", (Object) edgeOptionsMap)
+
+        WebDriver driver = new EdgeDriver(capabilities)
+
+        try {
+
+            WebDriverWait wait = new WebDriverWait(driver, 10)
+            WebDriverWait wait2 = new WebDriverWait(driver, 15)
+            WebDriverWait wait3 = new WebDriverWait(driver, 20)
+            WebDriverWait wait4 = new WebDriverWait(driver, 5)
+
+            driver.get("http://localhost:6012/mfc-oa/web/app.php")
+
+
+            def ingreso = wait2.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.id("btn_inicio_abajo"))
+            )
+            ingreso.click()
+
+            // OFERTAS
+//
+            def abrirOfertas = wait2.until(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath('//*[@title="Ofertas"]'))
+            )
+            abrirOfertas.click()
+
+            //OFERTA SELECCIONADA
+
+            if (!verificarSiUrlExiste("http://localhost:6012/mfc-oa/web/app.php/ofertas/edicion/${oferta}")) {
+                log.error("El proceso se detuvo: La URL no existe o no responde.")
+                driver.get("http://localhost:6012/mfc-oa/web/app.php")
+            } else {
+                driver.get("http://localhost:6012/mfc-oa/web/app.php/ofertas/edicion/${oferta}")
+
+                //ingreso compromiso participacion
+
+                def ingresoCompromiso = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("btnFormularioCompromisoParticipacion"))
+                )
+                ingresoCompromiso.click()
+
+                //EXPERIENCIA LABORAL
+
+                String selectorCss = ".btnExpPro[idpersonal='${personal}']"
+                WebElement ingresarExperiencia = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selectorCss)))
+                ingresarExperiencia.click()
+
+                def agregarExperienciaProfesional = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("agregarExperienciaProfesional"))
+                )
+                agregarExperienciaProfesional.click()
+
+//
+//                //tipo de documento
+//                def comboUno = wait.until(
+//                        ExpectedConditions.visibilityOfElementLocated(By.id("comproPartici_tipoDocumentoCp"))
+//                )
+//                Select seleccionarTipoDocumento = new Select(comboUno)
+//                seleccionarTipoDocumento.selectByVisibleText("CÉDULA")
+//
+                //empresa
+
+                def campoEmpresa = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_empresaEp"))
+                )
+                campoEmpresa.clear()
+                campoEmpresa.sendKeys("Tedein")
+//
+                //contratante
+
+                def campoContratante = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_contratanteEp"))
+                )
+                campoContratante.clear()
+                campoContratante.sendKeys("Luis Lopez")
+//
+                //proyecto
+
+                def campoProyecto = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_proyectoEp"))
+                )
+                campoProyecto.clear()
+                campoProyecto.sendKeys("XXXXXX")
+
+                //monto
+
+                def campoMonto = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_montoProyecyoEp"))
+                )
+                campoMonto.clear()
+                campoMonto.sendKeys("50000")
+
+                //funcion
+
+                def campoFuncion = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_cargoEp"))
+                )
+                campoFuncion.clear()
+                campoFuncion.sendKeys("Desarrollador web")
+
+                //tiempo de participacion
+
+                def campoTiempoParticipacion = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_tiempoPartiConsCp"))
+                )
+                campoTiempoParticipacion.clear()
+                campoTiempoParticipacion.sendKeys("10")
+
+                //tiempo de participacion seleccion
+
+                def comboTiempoParticipacion = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_tiempoPartiConsCpMedida"))
+                )
+                Select seleccionarTiempoParticipacion= new Select(comboTiempoParticipacion)
+                seleccionarTiempoParticipacion.selectByVisibleText("AÑOS")
+
+                //actividades relevantes
+
+                def comboNE = wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_activiRelevEp"))
+                )
+                Select seleccionarNivelEstudio = new Select(comboNE)
+                seleccionarNivelEstudio.selectByVisibleText("Actividades.....")
+
+                //boton guardar
+
+                def guardarPersonal = wait.until(
+                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+                guardarPersonal.click()
+
+                def guardarPersonal2 = wait.until(
+                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+                guardarPersonal2.click()
+
+                WebElement botonGuardar = driver.findElement(By.id("guardarExperienciaProfesional"))
+
+                JavascriptExecutor js3 = (JavascriptExecutor) driver
+                js3.executeScript("arguments.focus();", botonGuardar)
+                js3.executeScript("arguments.click();", botonGuardar)
+
+            }    // Aquí puedes agregar clics, interactuar con formularios, etc.
+
+        } catch (Exception e ) {
+            println "Ocurrió un error en Selenium: ${e.message}"
+            e.printStackTrace()
+        } finally {
+            // 5. Asegurar el cierre del proceso de Firefox
+            if (driver != null) {
+//                driver.quit()
+                println "=== Terminado correctamente ==="
             }
         }
     }
