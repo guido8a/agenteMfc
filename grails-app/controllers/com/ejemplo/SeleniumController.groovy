@@ -52,7 +52,7 @@ class SeleniumController {
     }
 
     def iniciarCargaExperienciaLaboral() {
-        println "=== Petición web recibida: Iniciando Selenium ==="
+        println "=== Petición iniciarCargaExperienciaLaboral ==="
 
         String numeroOferta = params.id
         String numeroPersonal = params.personal

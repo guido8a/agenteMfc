@@ -477,7 +477,7 @@ class SeleniumService {
     }
 
     void ejecutarAutomatizacionExperienciaLaboral(int oferta, int personal) {
-        println "=== Iniciando automatización con Edge ==="
+        println "=== Iniciando ExperienciaLaboral ==="
 
         if (!targetFile.exists()) {
 
@@ -545,6 +545,7 @@ class SeleniumService {
                 log.error("El proceso se detuvo: La URL no existe o no responde.")
                 driver.get("http://localhost:6012/mfc-oa/web/app.php")
             } else {
+//                driver.get("http://localhost:6012/mfc-oa/web/app.php/ofertas/edicion/${oferta}")
                 driver.get("http://localhost:6012/mfc-oa/web/app.php/ofertas/edicion/${oferta}")
 
                 //ingreso compromiso participacion
@@ -565,6 +566,7 @@ class SeleniumService {
                 )
                 agregarExperienciaProfesional.click()
 
+                println "agregando experiencia profesional"
 //
 //                //tipo de documento
 //                def comboUno = wait.until(
@@ -647,6 +649,11 @@ class SeleniumService {
 //                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
 //                guardarPersonal2.click()
 
+                JavascriptExecutor js0 = (JavascriptExecutor) driver
+                WebElement divBody = driver.findElementByClassName("modal-body")
+                divBody.click()
+
+
                 JavascriptExecutor js3 = (JavascriptExecutor) driver
 
 //                WebElement dialogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("modExpProfesional")))
@@ -690,6 +697,15 @@ class SeleniumService {
             return false
         }
     }
+
+
+    /*
+    * pasos para probar el sistema:
+    * ./gradlew clean assemble
+    * cp build/libs/sele12-0.1.war /media/guido/MEMORIA\ USB/
+    * java -jar sele12-0.1.war
+    * ingresar y salir de MFC
+    * Ir a firefox y probar desde localhost:8080 */
 
 }
 
