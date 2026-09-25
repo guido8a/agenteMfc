@@ -555,9 +555,19 @@ class SeleniumService {
                 )
                 ingresoCompromiso.click()
 
+                //identificar los td de la tabla
+
+//                String xpathSegundoBoton = "//td[text()='${personal}']/parent::tr/td[last()]/button[2]"
+                String xpathSegundoBoton = "//td[text()='${personal}']/parent::tr/td[last()]//button[2]"
+                WebElement segundoBoton = driver.findElement(By.xpath(xpathSegundoBoton))
+                String idDelBoton = segundoBoton.getAttribute("idpersonal")
+
+                println "El ID del segundo botón es: " + idDelBoton
+
                 //EXPERIENCIA LABORAL
 
-                String selectorCss = ".btnExpPro[idpersonal='${personal}']"
+//                String selectorCss = ".btnExpPro[idpersonal='${personal}']"
+                String selectorCss = ".btnExpPro[idpersonal='${idDelBoton}']"
                 WebElement ingresarExperiencia = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selectorCss)))
                 ingresarExperiencia.click()
 
@@ -649,22 +659,22 @@ class SeleniumService {
 //                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
 //                guardarPersonal2.click()
 
-                JavascriptExecutor js0 = (JavascriptExecutor) driver
-                WebElement divBody = driver.findElementByClassName("modal-body")
-                divBody.click()
+//                JavascriptExecutor js0 = (JavascriptExecutor) driver
+
+                //                WebElement dialogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("modExpProfesional")))
 
 
-                JavascriptExecutor js3 = (JavascriptExecutor) driver
-
-//                WebElement dialogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("modExpProfesional")))
-
-                WebElement botonGuardar = driver.findElement(By.id("guardarExperienciaProfesional"))
-
-//                js3.executeScript("arguments.focus();", dialogo)
-                js3.executeScript("arguments.focus();", botonGuardar)
-                js3.executeScript("arguments.click();", botonGuardar)
-
-                botonGuardar.sendKeys(Keys.ENTER)
+//                WebElement divBody = driver.findElementByClassName("modal-body")
+//                divBody.click()
+//
+//                JavascriptExecutor js3 = (JavascriptExecutor) driver
+//
+//                WebElement botonGuardar = driver.findElement(By.id("guardarExperienciaProfesional"))
+//
+//                js3.executeScript("arguments.focus();", botonGuardar)
+//                js3.executeScript("arguments.click();", botonGuardar)
+//
+//                botonGuardar.sendKeys(Keys.ENTER)
 
             }    // Aquí puedes agregar clics, interactuar con formularios, etc.
 
