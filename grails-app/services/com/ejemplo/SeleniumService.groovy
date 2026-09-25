@@ -557,7 +557,6 @@ class SeleniumService {
 
                 //identificar los td de la tabla
 
-//                String xpathSegundoBoton = "//td[text()='${personal}']/parent::tr/td[last()]/button[2]"
                 String xpathSegundoBoton = "//td[text()='${personal}']/parent::tr/td[last()]//button[2]"
                 WebElement segundoBoton = driver.findElement(By.xpath(xpathSegundoBoton))
                 String idDelBoton = segundoBoton.getAttribute("idpersonal")
@@ -566,7 +565,6 @@ class SeleniumService {
 
                 //EXPERIENCIA LABORAL
 
-//                String selectorCss = ".btnExpPro[idpersonal='${personal}']"
                 String selectorCss = ".btnExpPro[idpersonal='${idDelBoton}']"
                 WebElement ingresarExperiencia = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selectorCss)))
                 ingresarExperiencia.click()
@@ -577,14 +575,7 @@ class SeleniumService {
                 agregarExperienciaProfesional.click()
 
                 println "agregando experiencia profesional"
-//
-//                //tipo de documento
-//                def comboUno = wait.until(
-//                        ExpectedConditions.visibilityOfElementLocated(By.id("comproPartici_tipoDocumentoCp"))
-//                )
-//                Select seleccionarTipoDocumento = new Select(comboUno)
-//                seleccionarTipoDocumento.selectByVisibleText("CÉDULA")
-//
+
                 //empresa
 
                 def campoEmpresa = wait.until(
@@ -625,6 +616,16 @@ class SeleniumService {
                 campoFuncion.clear()
                 campoFuncion.sendKeys("Desarrollador web")
 
+
+                //actividades relevantes
+
+                def campoActividades= wait.until(
+                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_activiRelevEp"))
+                )
+                campoActividades.clear()
+                campoActividades.sendKeys("Actividades...")
+
+
                 //tiempo de participacion
 
                 def campoTiempoParticipacion = wait.until(
@@ -641,23 +642,26 @@ class SeleniumService {
                 Select seleccionarTiempoParticipacion= new Select(comboTiempoParticipacion)
                 seleccionarTiempoParticipacion.selectByVisibleText("AÑOS")
 
-                //actividades relevantes
 
-                def campoActividades= wait.until(
-                        ExpectedConditions.visibilityOfElementLocated(By.id("expProfe_activiRelevEp"))
-                )
-                campoActividades.clear()
-                campoActividades.sendKeys("Actividades...")
 
                 //boton guardar
 
-//                def guardarPersonal = wait.until(
-//                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
-//                guardarPersonal.click()
 //
-//                def guardarPersonal2 = wait.until(
-//                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
-//                guardarPersonal2.click()
+//                String xpathUltimoModalContent = "//div[@id='modExpProfesional']//div[@class='modal-dialog']//div[@class='modal-content'][last()]"
+//                WebElement ultimoModal = driver.findElement(By.xpath(xpathUltimoModalContent))
+////                WebElement botonConfirmar = ultimoModal.findElement(By.xpath(".//button[text()='Confirmar']"))
+//                WebElement botonGuardar = ultimoModal.findElement(By.xpath(".//button[text()='Guardar']"))
+////                WebElement botonGuardar = ultimoModal.findElement(By.id("guardarExperienciaProfesional"))
+//                botonGuardar.click()
+
+
+                def guardarPersonal = wait.until(
+                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+                guardarPersonal.click()
+
+                def guardarPersonal2 = wait.until(
+                        ExpectedConditions.elementToBeClickable(By.id("guardarExperienciaProfesional")) )
+                guardarPersonal2.click()
 
 //                JavascriptExecutor js0 = (JavascriptExecutor) driver
 
